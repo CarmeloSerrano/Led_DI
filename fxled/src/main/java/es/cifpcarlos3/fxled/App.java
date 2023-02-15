@@ -15,33 +15,35 @@
  */
 package es.cifpcarlos3.fxled;
 
+import java.io.IOException;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
-public class App extends Application {
-    private static int noOfNodes = 0;
-
-    @Override public void start(Stage stage) {
-        var control = new ShapeLed();
-        control.setPrefWidth(200);
-        control.setPrefHeight(200);
-
-        StackPane pane = new StackPane();
-        pane.getChildren().setAll(control);
-
-        Scene scene = new Scene(pane);
-
-        stage.setTitle("JavaFX Led Canvas");
-        stage.setScene(scene);
-        stage.show();
-
-        control.setBlinking(true);
+public class Main extends Application {
+    
+    @Override
+    public void start(javafx.stage.Stage primaryStage) {
+        
+        try {
+             FXMLLoader loader = new FXMLLoader();
+             loader.setLocation(Main.class.getResource("/vista/Led_Vista.fxml"));
+             javafx.scene.layout.Pane ventana = (javafx.scene.layout.Pane) loader.load();
+             
+             // Show the scene containing the root layout.
+             javafx.scene.Scene scene = new javafx.scene.Scene(ventana);
+             primaryStage.setScene(scene);
+             primaryStage.show();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
-
+    
     public static void main(String[] args) {
-        Application.launch(args);
+        launch(args);
     }
 }
