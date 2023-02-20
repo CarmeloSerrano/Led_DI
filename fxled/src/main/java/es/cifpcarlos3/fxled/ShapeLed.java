@@ -111,13 +111,13 @@ public class ShapeLed extends Region {
     // Cuando cambian las propiedades, hay que redibujar
     private void registerListeners() {
         
-        setMouseClicked((MouseEvent evt) -> setBlinking(!isBlinking()));
+        setOnMouseClicked((MouseEvent) -> setBlinking(!isBlinking()));
         
-        setOnMouseEntered((MouseEvent evt) -> {
-        colorAnterior = getLedColor();
-        setLedColor(ShapeLed.Color.GREEN());
+        setOnMouseEntered((MouseEvent) -> {
+        //colorAnterior = getLedColor();
+        setLedColor(Color.GREEN);
         });
-        setOnMouseExited((MouseEvent evt) -> setLedColor (colorAnterior));
+        setOnMouseExited((MouseEvent) -> setLedColor (getLedColor())); 
         
         widthProperty().addListener(observable -> recalc());
         heightProperty().addListener(observable -> recalc());
